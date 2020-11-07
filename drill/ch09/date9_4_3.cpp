@@ -1,11 +1,16 @@
 #include "std_lib_facilities.h"
 
-struct Date{
+class Date {
 	int y,m,d;
-	bool letezik(int y,int m,int d);
+public:
 	Date(int year,int month,int day): y(year),m(month),d(day){if (!letezik(y,m,d)) error("Wrong date!");}
 	void add_day(int n);
-	};
+	bool letezik(int y,int m,int d);
+
+	int day() {return d;}
+	int month() {return m;}
+	int year() {return y;}
+};
 
 bool Date::letezik(int y,int m,int d)
 {
@@ -21,23 +26,18 @@ void Date::add_day(int n)
 
 
 int main()
-try{
-	Date today{2001,07,23};
-	
-	cout << today.y << "\t" << today.m << "\t" << today.d << "\n";
-	
-	Date miez{2005,23,52};
+{
 
-	cout << miez.y << "\t" << miez.m << "\t" << miez.d << "\n";
+	Date today{2020,11,07};
 
-	
+	cout << today.year() << "." 
+		<< today.month() << "." << today.day() << endl;
+
+	Date tomorrow{today};
+	tomorrow.add_day(1);
+
+	cout << tomorrow.year() << "." 
+		<< tomorrow.month() << "." << tomorrow.day() << endl;
+
 	return 0;
-}catch(exception& e)
-{
-	cerr << e.what() << endl;
-	return 1;
-}catch(...)
-{
-	cerr << "Exceptions occurred!" << endl;
-	return -1;
 }
